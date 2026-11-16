@@ -1,0 +1,48 @@
+[workspace]
+[package]
+name = "wasiat_vault"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Wasiat — a digital inheritance vault on Tari Ootle: lock XTM for a beneficiary, prove you are still here with a heartbeat, and let them claim it only after you have been silent past the deadline"
+repository = "https://github.com/dimasamirul1899-afk/tari-wasiat-vault"
+
+[package.metadata.tari-template]
+tags = ["inheritance", "vault", "wasiat"]
+category = "payments"
+documentation = "https://github.com/dimasamirul1899-afk/tari-wasiat-vault#readme"
+homepage = "https://github.com/dimasamirul1899-afk/tari-wasiat-vault"
+
+[dependencies]
+tari_template_lib = { version = "0.40" }
+
+[dev-dependencies]
+tari_template_test_tooling = "0.53.2"
+tari_utilities = "0.10"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+opt-level = 's'
+lto = true
+codegen-units = 1
+panic = 'abort'
+strip = true
+
+# The WASM engine is ~10x slower in debug builds; optimise it even for tests.
+[profile.dev.package.wasmer]
+opt-level = 2
+[profile.dev.package.wasmer-compiler]
+opt-level = 2
+[profile.dev.package.wasmer-compiler-cranelift]
+opt-level = 2
+[profile.dev.package.cranelift-codegen]
+opt-level = 2
+[profile.dev.package.cranelift-frontend]
+opt-level = 2
+[profile.dev.package.cranelift-entity]
+opt-level = 2
+
+[build-dependencies]
+tari_ootle_template_build = "0.20"

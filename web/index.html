@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wasiat — a digital inheritance vault on Tari Ootle</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Wasiat</h1>
+  <p class="tagline">A digital inheritance vault on Tari Ootle. Lock XTM for someone you love, prove you are still here with a heartbeat — and if you ever go silent past the deadline, only they can claim it.</p>
+  <p class="sim-badge">DEMO SIMULATION — no wallet, no real funds. Every action shows the Ootle call it maps to, and refusals use the template's exact messages.</p>
+</header>
+
+<nav class="tabs">
+  <button id="tab-sim" class="active">Simulation demo</button>
+  <button id="tab-live">Live (Sapient / Esmeralda)</button>
+</nav>
+
+<main id="panel-sim">
+  <section class="card" id="actors">
+    <h2>1 · Act as</h2>
+    <p>The template checks <em>who</em> is calling. Pick a role — the demo enforces the same rules on-chain.</p>
+    <div class="roles">
+      <button data-role="owner" class="role active">Owner</button>
+      <button data-role="beneficiary" class="role">Beneficiary</button>
+      <button data-role="stranger" class="role">Stranger</button>
+    </div>
+    <p class="hint">You are acting as: <strong id="who">owner</strong>. The owner creates the vault, sends heartbeats, and can cancel. Only the beneficiary can claim — and only after the deadline.</p>
+  </section>
+
+  <section class="card" id="epoch-box">
+    <h2>2 · Chain epoch (simulated)</h2>
+    <p>Current epoch: <strong id="epoch">1000</strong> &nbsp;·&nbsp; the deadline is an epoch, not a date — a mainnet epoch is about 20 minutes, so 100 epochs ≈ 33 hours. A real vault would use a much longer silence period.</p>
+    <button id="epoch-plus">+1 epoch</button>
+    <button id="epoch-plus10">+10 epochs</button>
+    <button id="epoch-plus100">+100 epochs</button>
+  </section>
+
+  <section class="card" id="create-box">
+    <h2>3 · Create the vault</h2>
+    <label>Amount to lock (µT)
+      <input id="amount" type="number" min="1" value="1000000">
+    </label>
+    <label>Beneficiary
+      <select id="beneficiary">
+        <option value="beneficiary">Aisha — the beneficiary</option>
+        <option value="owner">Owner (invalid — the template refuses this)</option>
+      </select>
+    </label>
+    <label>Inactivity period (epochs)
+      <input id="inactivity" type="number" min="1" value="100">
+    </label>
+    <button id="create-btn">Create vault — create()</button>
+    <p class="hint">Maps to <code>WasiatVault::create(bucket, beneficiary, beneficiary_account, inactivity_epochs, owner_account)</code>. The owner is whoever creates the vault.</p>
+  </section>
+
+  <section class="card" id="vault-box">
+    <h2>4 · The vault</h2>
+    <div id="vault-status"><p class="empty">No vault yet — create one above.</p></div>
+    <div class="actions">
+      <button id="heartbeat-btn">Heartbeat — heartbeat()</button>
+      <button id="claim-btn">Claim — claim()</button>
+      <button id="cancel-btn">Cancel — cancel()</button>
+      <button id="reset-btn" class="secondary">Reset demo</button>
+    </div>
+    <p class="hint">Try it: claim too early as the beneficiary (refused), heartbeat as the owner (deadline moves), let the epoch pass the deadline, then claim. Or cancel as the owner and watch the full refund.</p>
+  </section>
+
+  <section class="card" id="log-box">
+    <h2>5 · Events</h2>
+    <ol id="events" class="events"><li class="empty">Nothing yet.</li></ol>
+  </section>
+</main>
+
+<main id="panel-live" hidden>
+  <section class="card">
+    <h2>Live (Sapient / Esmeralda)</h2>
+    <p><strong>Not connected yet.</strong> The template has not been published to Esmeralda or to mainnet, so there is no live path to try today. The simulation on the other tab runs the exact same state machine as the template — same states, same rules, same refusal messages — verified by the engine tests in the repo.</p>
+    <p>When the template is published, this tab will let you create a real vault with a Sapient wallet, send real heartbeats, and claim real XTM.</p>
+  </section>
+</main>
+
+<footer>
+  <p><strong>Wasiat</strong> — <em>wasiat</em> is Indonesian for "last will". Entry for the Tari November Build Contest: MVP. Code (MIT) in the repo linked from the contest thread. The template is not audited — do not lock meaningful amounts in it until it has been reviewed.</p>
+</footer>
+
+<script src="sim.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: #1c2333; background: #f4f6f8; line-height: 1.5; }
+header { background: #17295c; color: #fff; padding: 28px 20px 20px; }
+header h1 { margin: 0 0 6px; font-size: 32px; letter-spacing: .5px; }
+header .tagline { margin: 0; max-width: 720px; opacity: .92; }
+.sim-badge { display: inline-block; margin-top: 12px; background: #f5b942; color: #241a00; font-weight: 700; font-size: 13px; padding: 5px 10px; border-radius: 4px; }
+.tabs { display: flex; gap: 8px; padding: 12px 20px 0; }
+.tabs button { border: 1px solid #c9d2de; background: #fff; padding: 8px 16px; border-radius: 6px 6px 0 0; cursor: pointer; font-size: 15px; }
+.tabs button.active { background: #17295c; color: #fff; border-color: #17295c; }
+main { max-width: 760px; margin: 0 auto; padding: 16px 20px 32px; }
+.card { background: #fff; border: 1px solid #dde3ea; border-radius: 8px; padding: 16px 18px; margin-bottom: 14px; }
+.card h2 { margin: 0 0 8px; font-size: 18px; }
+.card p { margin: 6px 0; }
+.hint { color: #5a6577; font-size: 14px; }
+.empty { color: #8a94a6; font-style: italic; }
+.roles { display: flex; gap: 8px; flex-wrap: wrap; }
+.role, .actions button, #epoch-box button, #create-btn { border: 1px solid #17295c; background: #fff; color: #17295c; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 15px; }
+.role.active { background: #17295c; color: #fff; }
+#create-btn, #heartbeat-btn, #claim-btn { background: #17295c; color: #fff; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.actions .secondary { background: #fff; color: #5a6577; border-color: #c9d2de; }
+label { display: block; margin: 10px 0; font-weight: 600; font-size: 14px; }
+label input, label select { display: block; margin-top: 4px; width: 100%; max-width: 320px; padding: 8px; border: 1px solid #c9d2de; border-radius: 6px; font-size: 15px; }
+dl { display: grid; grid-template-columns: 170px 1fr; gap: 4px 12px; margin: 8px 0; }
+dt { font-weight: 600; color: #5a6577; }
+dd { margin: 0; }
+code { background: #eef1f5; padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+.events { list-style: none; padding: 0; margin: 8px 0 0; }
+.events li { border-top: 1px solid #e6ebf0; padding: 8px 0; }
+.events .epoch { color: #8a94a6; font-size: 13px; }
+.events li.refused { color: #9b2c2c; }
+.events li.ok { color: #276749; }
+footer { max-width: 760px; margin: 0 auto; padding: 0 20px 32px; color: #5a6577; font-size: 14px; }
