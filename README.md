@@ -32,6 +32,8 @@ A mainnet epoch is about 20 minutes, so pick the inactivity period accordingly �
 
 ## Demo
 
+Live demo: **https://dimasamirul1899-afk.github.io/tari-wasiat-vault/web/index.html**
+
 `web/` is a static, walletless simulation of the exact same state machine — no build step, no runtime dependencies. Open `web/index.html` in a browser (or serve the folder) and walk through create → heartbeat → claim, or the cancel path. Every action shows the Ootle call it maps to, and refusals use the template's exact messages.
 
 The demo has a "Live (Sapient / Esmeralda)" tab. It is a clearly-labeled placeholder: the template has not been published to any network yet, and the tab says so. Nothing in the demo moves real funds, and nothing pretends to.
@@ -48,6 +50,20 @@ cargo build --release --target wasm32-unknown-unknown   # WASM template
 ```
 
 The engine tests (`template/tests/wasiat_vault.rs`) cover: create locking funds, create guards (zero inactivity, self-beneficiary), heartbeat moving the deadline, heartbeat by a non-owner, early claim, claim by a non-beneficiary, claim after the deadline paying the exact vault amount, double-claim / heartbeat / cancel after a claim, cancel refunding the owner, and cancel by a non-owner.
+
+WASM release build: `template/target/wasm32-unknown-unknown/release/wasiat_vault.wasm` — 129,397 bytes, sha256 `bea034ec9424a4c3f1e1ee54f88ac3b6610121dccf38cf742267f2ed91616742`.
+
+## Publish to Esmeralda (you sign; this repo does not)
+
+The template is built and tested, but it has not been published to Esmeralda or mainnet — publishing needs your own Tari wallet, and no key, seed, or payment address belongs in this repository. Steps:
+
+1. Build the WASM above (or take it from a release of this repo).
+2. Install the Ootle CLI (`cargo install tari-ootle-cli`, binary `tari`) or open the Tari wallet web UI (Sapient or Tari Universe) on Esmeralda.
+3. Fund the wallet with tTARI (Esmeralda testnet: burn testnet Minotari and claim it in the wallet; the public faucet starts empty).
+4. Publish the WASM from the wallet/CLI and note the `template_…` address.
+5. Paste the template address into the demo's Live tab (and update this README).
+
+Until then, the walletless demo is the honest path — several other November entries submitted exactly this way.
 
 ## Honest notes
 
